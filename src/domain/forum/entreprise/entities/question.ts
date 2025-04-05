@@ -19,32 +19,16 @@ export class Question extends Entity<QuestionProps> {
     return this.props.authorId
   }
 
-  get title() {
-    return this.props.title
-  }
-
-  set title(title: string) {
-    this.props.title = title
-    this.props.slug = Slug.createFromText(title)
-    this.touch()
-  }
-
-  get content() {
-    return this.props.content
-  }
-
-  set content(content: string) {
-    this.props.content = content
-    this.touch()
-  }
-
   get bestAnswerId() {
     return this.props.bestAnswerId
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
-    this.props.bestAnswerId = bestAnswerId
-    this.touch()
+  get title() {
+    return this.props.title
+  }
+
+  get content() {
+    return this.props.content
   }
 
   get slug() {
@@ -71,13 +55,31 @@ export class Question extends Entity<QuestionProps> {
     this.props.updatedAt = new Date()
   }
 
+  set title(title: string) {
+    this.props.title = title
+    this.props.slug = Slug.createFromText(title)
+
+    this.touch()
+  }
+
+  set content(content: string) {
+    this.props.content = content
+    this.touch()
+  }
+
+  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
+    this.props.bestAnswerId = bestAnswerId
+    this.touch()
+  }
+
   static create(
-    props: Optional<QuestionProps, 'createdAt'>,
+    props: Optional<QuestionProps, 'createdAt' | 'slug'>,
     id?: UniqueEntityID,
   ) {
     const question = new Question(
       {
         ...props,
+        slug: props.slug ?? Slug.createFromText(props.title),
         createdAt: new Date(),
       },
       id,
