@@ -1,8 +1,8 @@
 import { Either, left, right } from '@/core/either'
-import { Question } from '../../entreprise/entities/question'
+import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed-error'
+import { ResourceNotFoundError } from '@/domain/forum/application/use-cases/errors/resource-not-found-error'
 import { QuestionsRepository } from '../repositories/questions-repository'
-import { NotAllowedError } from './errors/not-allowed-error'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { Question } from '../../entreprise/entities/question'
 
 interface EditQuestionUseCaseRequest {
   authorId: string
@@ -17,6 +17,7 @@ type EditQuestionUseCaseResponse = Either<
     question: Question
   }
 >
+
 export class EditQuestionUseCase {
   constructor(private readonly questionsRepository: QuestionsRepository) {}
 
