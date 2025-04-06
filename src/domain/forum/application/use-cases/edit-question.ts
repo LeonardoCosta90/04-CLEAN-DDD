@@ -2,7 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { NotAllowedError } from '@/domain/forum/application/use-cases/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/domain/forum/application/use-cases/errors/resource-not-found-error'
 import { QuestionsRepository } from '../repositories/questions-repository'
-import { Question } from '../../entreprise/entities/question'
+import { Question } from '../../enterprise/entities/question'
 
 interface EditQuestionUseCaseRequest {
   authorId: string
